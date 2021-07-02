@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Domine&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/tables.css">
+</head>
+
+<body>
+  <!--Navigation-->
+  <div >
+    <nav class="navbar navbar-expand-md navbar-light navbar-custom sticky-top">
+      <a class="navbar-brand" href="/index"><img src="/images/logo.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link paras" href="">ADMIN DASHBOARD</a>
+          </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item paras active">
+            <a class="nav-link" href="/admin">USER</a>
+          </li>
+          <li class="nav-item paras">
+            <a class="nav-link" href="/table">BLOOD BANKS</a>
+          </li>
+          <li class="nav-item paras">
+            <a class="nav-link" href="/admin/camps">CAMPS</a>
+          </li>
+          <li class="nav-item paras">
+            <a class="nav-link" href="/login/logout">LOGOUT</a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </div>
+  <div class="main">
+    <center>
+    <h3 style="margin-top:20px;"><%=stat %></h3>
+    <div class="container">
+            <div><canvas class="mah" id="myChart"></canvas></div>
+    </div>     
+    </center>
+  </div>
+
+
+  <!--Footer-->
+  <footer>
+    <div class="container-fluid padding foot" >
+      <div class="row text-center">
+        <div class="col-md-4">
+          <img src="/images/rsz_raktadaan_logo.jpg">
+          <hr class="light">
+          <p class="paras">+91-9324040843</p>
+          <p class="paras">raktdan@gmail.com</p>
+          <p class="paras">A-5, Paradise, Godrej Hills</p>
+          <p class="paras">Kalyan,Thane,Maharashtra,India</p>
+        </div>
+        <div class="col-md-4">
+          <hr class="light">
+          <h5 class="paras">Offline Hours</h5>
+          <hr class="light">
+          <p class="paras">Monday: 8am-10pm</p>
+          <p class="paras">Saturday: 10am-4pm</p>
+          <p class="paras">Sunday: 10am-1pm</p>
+        </div>
+        <div class="col-md-4">
+          <hr class="light">
+          <h5 class="paras">Service Areas</h5>
+          <hr class="light">
+          <p class="paras">Mumbai, Maharshtra, 400601</p>
+          <p class="paras">Jaipur, Rajasthan, 302001</p>
+          <p class="paras">Gwalior, Madhya Pradesh, 474001</p>
+          <p class="paras">Trivandrum, Kerela, 695008</p>
+        </div>
+        <div class="col-12">
+          <hr class="light-100">
+          <h5 class="paras">&copy; raktDaan.com</h5>
+        </div>
+      </div>
+    </div>
+  </footer>
+ 
+</body>
+<script>
+    Chart.defaults.font.size = 30;
+    window.onload = function() {
+    let labels1 = ['A+ve','A-ve','B+ve','B-ve','AB+ve','AB-ve','O+ve','O-ve'];
+        let data1 = [<%= s[0] %> , <%= s[1] %> , <%= s[2] %> , <%= s[3] %>, <%= s[4] %> , <%= s[5] %> , <%= s[6] %> , <%= s[7] %>];
+        let colors1 = ['#34568b','#955251','#b565a7','#b93a32','#88b04b','#efc050','#6b5876','#fa7a35'];
+
+        let myChart = document.getElementById("myChart").getContext('2d');
+
+        let chart = new Chart(myChart, {
+            type: 'pie',
+            data: {
+                labels: labels1,
+                datasets: [{
+                    data: data1,
+                    backgroundColor: colors1,
+                    borderColor: ['rgb(0,0,0,0.3)']
+                }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: 'rgb(0, 0, 0, 1)',
+                        font: {
+                            weight: 'bold',
+                            size: 16,
+                        }
+                    }
+                }
+            }
+        });
+    }
+  </script>
+
+</html>
